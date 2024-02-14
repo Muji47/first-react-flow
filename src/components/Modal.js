@@ -8,7 +8,10 @@ cvalue:"email"},
 {name:"message",
 cvalue:"message"},
 {name:"endpint",
-cvalue:"endpint"}]
+cvalue:"endpint"},
+{name:"condition",
+cvalue:"condition"}
+]
 const[requiredValue,setRequiredValue]=useState({
   title:false,
   category:false
