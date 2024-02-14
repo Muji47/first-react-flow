@@ -2,7 +2,7 @@ import React from 'react'
 import { Handle, Position,useReactFlow,getIncomers,useStore} from 'reactflow'
 import Delete from './Delete';
 
-function EmailNode({data}) {
+function EmailNode(props) {
   const { deleteElements, setEdges, getNodes} = useReactFlow();
   const {edges } = useStore();
   const nodes=getNodes()
@@ -22,7 +22,8 @@ function EmailNode({data}) {
       }
     });
     deleteElements({ nodes: [{ id: nodeId }] })
-    setEdges([...updatedEdges])
+    const deleteE=updatedEdges.filter(e=>e.target!==nodeId)
+    setEdges([...deleteE])
   };
   
   return (
@@ -31,11 +32,11 @@ function EmailNode({data}) {
       <div className="border-2 text-center py-1 h-20 w-40 rounded-md bg-orange-300 text-white flex flex-col">
         <Delete
           onClick={() => {
-            handleDeleteNode(data.id);
+            handleDeleteNode(props.id);
           }}
         />
-        <p>{data.label}</p>
-        <p className="text-xs">Ctg:{data.category}</p>
+        <p>{props.data.label}</p>
+        <p className="text-xs">Ctg:{props.data.category}</p>
       </div>
       <Handle position={Position.Bottom} type="source" />
     </div>

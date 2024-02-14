@@ -2,40 +2,39 @@ import React from 'react'
 import { Handle,Position, useReactFlow, useStore, getIncomers} from 'reactflow'
 import Delete from './Delete';
 
-function EndNode({data}) {
+function EndNode(props) {
   const { deleteElements, setEdges, getNodes,setNodes} = useReactFlow();
   const {edges } = useStore();
   const nodes=getNodes()
 
   const handleDeleteNode = (nodeId) => {
-    console.log("getNodes",getNodes(),edges);
     const updateNode=nodes.find(node=>node.id===nodeId)
-    const incomers=getIncomers(updateNode,nodes,edges)
-    console.log(incomers,"incomers",nodes)
-    const updatedEdges = edges.map((edge) => {
-      if (edge.source === nodeId) {
-        return {
-          ...edge,
-          source: incomers[0].id, 
-        };
-      }else {
-        return edge;
-      }
-    });
+    // const incomers=getIncomers(updateNode,nodes,edges)
+  
+    
     const newNode={
-      id:"a",
+      id:`a${Date.now()}`,
       position:{
-          x:incomers[0].position.x,
-          y:incomers[0].position.y+120
+          x:updateNode.position.x,
+          y:updateNode.position.y
       },
       data:{
           label:"+"
       },
       type:"plusNod"
   }
+  const updatedEdges = edges.map((edge) => {
+    if (edge.target === nodeId) {
+      return {
+        ...edge, 
+        target:newNode.id
+      };
+    }else {
+      return edge;
+    }
+  });
   setNodes([newNode,...nodes])
     deleteElements({ nodes: [{ id: nodeId }] })
-   
     setEdges([...updatedEdges])
     
   };
@@ -45,11 +44,11 @@ function EndNode({data}) {
         <div className='border-2 text-center py-1 h-20 w-40 rounded-md bg-red-600 text-white flex flex-col'>
         <Delete
           onClick={() => {
-            handleDeleteNode(data.id);
+            handleDeleteNode(props.id);
           }}
         />
-        <p>{data.label}</p>
-        <p className="text-xs">Ctg:{data.category}</p>
+        <p>{props.data.label}</p>
+        <p className="text-xs">Ctg:{props.data.category}</p>
         </div>
     </div>
   )
