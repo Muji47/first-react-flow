@@ -90,14 +90,8 @@ export default memo((props) => {
       target:out.id,
       sourceHandle: "a",
     }
-    const newPlusEdge = {
-      id: `e-${addId}`,
-      source:newNode.id, 
-      target:`a${Number(incomers[0].id)+1}`,
-      sourceHandle: 'b',
-    };
     const newPlusNode=  {
-      id:`a${Number(incomers[0].id)+1}`,
+      id:`a${addId}`,
       position:{
           x:newNode.position.x+200,
           y: (newNode.position.y + 100)
@@ -107,6 +101,13 @@ export default memo((props) => {
       },
       type:"plusNod"
   }
+    const newPlusEdge = {
+      id: `e-${addId}`,
+      source:newNode.id, 
+      target:newPlusNode.id,
+      sourceHandle: 'b',
+    };
+    
   const findsourceHandle=edges.find(ed=>ed.target===out.id)
     const updatedEdge = edges.map((edge) => {
       if (edge.target ===nodeId ) {

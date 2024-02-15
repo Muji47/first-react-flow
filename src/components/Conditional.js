@@ -56,7 +56,7 @@ function Conditional(props) {
   const order=(nextNode)=>{
     setDltNodes(prev=>[...prev,nextNode])
     const outgoers = getOutgoers(nextNode, nodes, edges);
-    if(!edges.find(e=>e.source===nextNode.id)&&!dltNodes.includes(nextNode)){
+    if(!edges.find(e=>e.source===nextNode.id)&&dltNodes.includes(nextNode)){
       return
     }
     if(outgoers[0]){
