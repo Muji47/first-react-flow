@@ -1,5 +1,5 @@
 import React, { memo,useState } from 'react';
-import { Handle, Position ,useReactFlow,useStore,getIncomers, getOutgoers} from 'reactflow';
+import { Handle, Position ,useReactFlow,useStore,getIncomers,getOutgoers} from 'reactflow';
 import OpenModule from "./Modal";
 
 
@@ -27,7 +27,8 @@ export default memo((props) => {
   };
   const onClickAdd = () => {
     const out=nodes.find(n=>n.id===nodeId)
-    // const outgoers=getOutgoers(out,nodes,edges)
+    const outgoers=getOutgoers(out,nodes,edges)
+    console.log(outgoers,"nodes.find(n=>n.id===nodeId)")
     const incomers=getIncomers(out,nodes,edges)
     
     const addId=`${Date.now()}`
@@ -82,15 +83,18 @@ export default memo((props) => {
             },
             type: "condition",
           }
+          
     const newEdge = {
       id: `e${addId}`,
-      source:  incomers[0].id,
-      target:newNode.id 
+      source:  newNode.id ,
+      target:out.id,
+      sourceHandle: "a",
     }
     const newPlusEdge = {
       id: `e-${addId}`,
       source:newNode.id, 
       target:`a${Number(incomers[0].id)+1}`,
+      sourceHandle: 'b',
     };
     const newPlusNode=  {
       id:`a${Number(incomers[0].id)+1}`,
@@ -103,12 +107,13 @@ export default memo((props) => {
       },
       type:"plusNod"
   }
-    
+  const findsourceHandle=edges.find(ed=>ed.target===out.id)
     const updatedEdge = edges.map((edge) => {
       if (edge.target ===nodeId ) {
         return {
           ...edge,
-          source: newNode.id,
+          target: newNode.id,
+          sourceHandle: findsourceHandle.sourceHandle,
         };
       }
       return edge;

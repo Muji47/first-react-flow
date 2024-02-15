@@ -38,7 +38,7 @@ function EmailNode(props) {
         <p>{props.data.label}</p>
         <p className="text-xs">Ctg:{props.data.category}</p>
       </div>
-      <Handle position={Position.Bottom} type="source" />
+      <Handle position={Position.Bottom} type="source" id="a"/>
     </div>
   );
 }

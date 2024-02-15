@@ -1,5 +1,5 @@
 import React from 'react'
-import { Handle,Position, useReactFlow, useStore, getIncomers} from 'reactflow'
+import { Handle,Position, useReactFlow, useStore} from 'reactflow'
 import Delete from './Delete';
 
 function EndNode(props) {
@@ -29,9 +29,9 @@ function EndNode(props) {
         ...edge, 
         target:newNode.id
       };
-    }else {
-      return edge;
     }
+      return edge;
+    
   });
   setNodes([newNode,...nodes])
     deleteElements({ nodes: [{ id: nodeId }] })

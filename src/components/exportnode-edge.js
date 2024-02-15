@@ -26,4 +26,5 @@ export const edges=[{
     id:"s-e1",              
     source:"1",
     target:"a",
+    sourceHandle: 'a',
 }]

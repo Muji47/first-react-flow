@@ -13,6 +13,17 @@ function ConditionalModal({modalClose,deleteNodes,data,setSide,selectSide}) {
       value:"0"
     }
   ]
+  // const sides=[
+  //   {name:"select the category"},
+  //   {
+  //     name:"left",
+  //     value:"a"
+  //   },
+  //   {
+  //     name:"right",
+  //     value:"b"
+  //   }
+  // ]
   return (
     <div>
         <Modal show={modalClose} size="md" onClose={modalClose} popup>

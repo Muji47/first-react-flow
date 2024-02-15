@@ -69,7 +69,7 @@ function CustomNode() {
         return '#ff0072';
     }
   }
-
+console.log(node,edge,"node,edge")
   return (
     <div className="h-[100vh] w-[100vw]">
       <ReactFlowProvider>
