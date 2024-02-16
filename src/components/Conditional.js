@@ -71,8 +71,9 @@ function Conditional(props) {
     const outgoers = getOutgoers(deleteNode, nodes, edges);
     const incomers = getIncomers(deleteNode, nodes, edges);
     console.log(side,"side")
-    const i=side==="1"?"0":"1"
-    let nextNode = outgoers[Number(i)]; 
+    const i=side==="1"?0:1
+    console.log(i,"i")
+    let nextNode = outgoers[i]; 
     order(nextNode)
     const newEdge=
     side==="1"?{
