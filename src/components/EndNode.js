@@ -9,7 +9,6 @@ function EndNode(props) {
 
   const handleDeleteNode = (nodeId) => {
     const updateNode=nodes.find(node=>node.id===nodeId)
-    // const incomers=getIncomers(updateNode,nodes,edges)
   
     
     const newNode={
